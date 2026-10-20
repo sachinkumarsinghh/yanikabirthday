@@ -1,0 +1,471 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Yanika's Birthday</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:wght@400;500;700&family=Kalam:wght@400&family=Rozha+One&display=swap">
+<style>
+  /* Layout concept: a black bus-ticket world. A hero with a thermal ticket, a route timeline
+     (Aug 2025 -> 15 Mar 2026 -> today), a street-stall menu, a letter, and one candle to blow out. */
+  :root {
+    --ink: #0a0908;
+    --ink-2: #121110;
+    --line: #2c2823;
+    --text: #ece6da;
+    --muted: #9a9286;
+    --accent: #ffb020;
+    --accent-soft: #ffd36b;
+    --accent-ink: #1a1204;
+    --paper: #e9eae6;
+    --paper-ink: #14130f;
+    --font-display: 'Rozha One', Georgia, 'Times New Roman', serif;
+    --font-body: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'DM Mono', ui-monospace, Menlo, Consolas, monospace;
+    --font-hand: 'Kalam', 'Segoe Script', 'Bradley Hand', cursive;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font: 400 1.0625rem/1.65 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  /* film grain */
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: .07;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; text-wrap: balance; line-height: 1.05; }
+  p { margin: 0; }
+  .mono { font-family: var(--font-mono); letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    gap: 44px;
+    padding-block: 56px 64px;
+    align-items: center;
+  }
+  .hero > * { min-width: 0; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 14px; color: var(--text);
+  }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 0 rgba(255,176,32,.6); animation: pulse 2.4s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,176,32,0); } 100% { box-shadow: 0 0 0 0 rgba(255,176,32,0); } }
+  .kicker { margin-top: 34px; color: var(--muted); }
+  .hero h1 {
+    font-size: clamp(3.6rem, 17vw, 5.8rem);
+    margin-top: 10px;
+    letter-spacing: -.01em;
+  }
+  .hero h1 .end { color: var(--accent); }
+  .lede { margin-top: 22px; max-width: 34ch; font-size: 1.2rem; color: var(--text); }
+  .lede em { font-style: normal; color: var(--accent); }
+
+  /* ticket */
+  .ticket {
+    position: relative;
+    background: var(--paper);
+    color: var(--paper-ink);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.04);
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
+  .ticket-main { padding: 22px 22px 18px; }
+  .ticket-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; border-bottom: 2px solid var(--paper-ink); padding-bottom: 12px; }
+  .ticket-head b { font-size: .95rem; letter-spacing: .12em; }
+  .ticket-head span { font-size: .8rem; opacity: .7; }
+  .ticket dl { margin: 14px 0 0; display: grid; gap: 9px; }
+  .ticket dl > div { display: grid; grid-template-columns: 5.6rem minmax(0, 1fr); gap: 10px; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; }
+  .ticket dt { opacity: .6; }
+  .ticket dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+  .tear { position: relative; height: 0; border-top: 2px dashed rgba(20,19,15,.35); margin-inline: 14px; }
+  .tear::before, .tear::after {
+    content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink);
+  }
+  .tear::before { left: -25px; }
+  .tear::after { right: -25px; }
+  .ticket-stub { padding: 16px 22px 20px; display: grid; gap: 10px; }
+  .barcode {
+    height: 46px;
+    background: repeating-linear-gradient(90deg,
+      var(--paper-ink) 0 2px, transparent 2px 5px,
+      var(--paper-ink) 5px 6px, transparent 6px 9px,
+      var(--paper-ink) 9px 12px, transparent 12px 14px,
+      var(--paper-ink) 14px 15px, transparent 15px 19px);
+  }
+  .stub-note { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 10px; opacity: .75; }
+
+  /* ---------- Ticker ---------- */
+  .ticker { background: var(--accent); color: var(--accent-ink); overflow: hidden; border-block: 1px solid #000; }
+  .ticker-track { display: flex; width: max-content; animation: slide 34s linear infinite; }
+  .ticker-group { display: flex; align-items: center; flex-shrink: 0; }
+  .ticker-group span { font-family: var(--font-mono); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: .85rem; padding: 13px 0; white-space: nowrap; }
+  .ticker-group i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-ink); margin-inline: 26px; flex-shrink: 0; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: 84px 0; }
+  .eyebrow { color: var(--accent); margin-bottom: 14px; }
+  h2 { font-size: clamp(2rem, 7vw, 3.4rem); max-width: 18ch; }
+
+  /* route */
+  .stops {
+    --p: 100%;
+    list-style: none; margin: 44px 0 0; padding: 0 0 0 46px; position: relative;
+    display: grid; gap: 46px;
+  }
+  .stops::before, .stops::after { content: ""; position: absolute; left: 11px; top: 8px; width: 2px; }
+  .stops::before { bottom: 8px; background: var(--line); }
+  .stops::after { height: calc((100% - 16px) * var(--p) / 100%); background: var(--accent); transition: height .15s linear; }
+  .stop { position: relative; }
+  .stop::before {
+    content: ""; position: absolute; left: -46px; top: 4px; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--ink); border: 2px solid var(--accent); z-index: 1;
+  }
+  .stop:last-child::before { background: var(--accent); box-shadow: 0 0 0 6px rgba(255,176,32,.18); }
+  .stop .when { color: var(--accent); }
+  .stop h3 { font-size: clamp(1.6rem, 5vw, 2.1rem); margin-top: 6px; }
+  .stop p { margin-top: 10px; max-width: 52ch; color: var(--text); opacity: .86; }
+  .count { display: flex; align-items: baseline; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .count b { font-family: var(--font-display); font-weight: 400; font-size: clamp(4rem, 16vw, 6.5rem); line-height: .9; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .count span { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; font-size: .85rem; color: var(--muted); }
+
+  /* favourites */
+  .fav-grid { display: grid; gap: 28px; margin-top: 44px; align-items: start; }
+  .fav-grid > * { min-width: 0; }
+  .menu {
+    border: 2px dashed var(--accent); border-radius: 4px; padding: 26px 22px 22px;
+    background: var(--ink-2); position: relative;
+  }
+  .menu-title { display: flex; justify-content: space-between; gap: 12px; color: var(--accent); padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .menu ul { list-style: none; margin: 8px 0 0; padding: 0; }
+  .menu li { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; }
+  .menu li .name { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.1; }
+  .menu li .lead { flex: 1; min-width: 12px; border-bottom: 2px dotted #3a352e; transform: translateY(-5px); }
+  .menu li .tag { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: right; }
+  .menu li.top .name { font-size: 2.3rem; color: var(--accent); }
+  .menu li.top .tag { color: var(--accent-ink); background: var(--accent); padding: 3px 9px; border-radius: 3px; }
+  .menu-foot { margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
+
+  .about { display: grid; align-content: start; }
+  .about > div { padding: 20px 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+  .about > div:last-child { border-bottom: 1px solid var(--line); }
+  .about dt { color: var(--accent); }
+  .about dd { margin: 0; font-size: 1.12rem; }
+  .about dd b { font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; margin-right: 8px; }
+  .about dd small { display: block; font-size: .98rem; color: var(--muted); margin-top: 2px; }
+
+  /* letter */
+  .letter { margin-top: 36px; max-width: 60ch; display: grid; gap: 20px; font-size: 1.15rem; line-height: 1.75; }
+  .letter p:first-child::first-letter { font-family: var(--font-display); font-size: 3.4rem; float: left; line-height: .9; padding: 6px 10px 0 0; color: var(--accent); }
+  .sign { margin-top: 8px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .sign b { font-family: var(--font-hand); font-weight: 400; font-size: 2.2rem; color: var(--accent); line-height: 1; }
+  .sign span { color: var(--muted); }
+
+  /* wish */
+  .wish { text-align: center; padding-bottom: 96px; }
+  .wish h2 { margin-inline: auto; }
+  .candle-btn {
+    position: relative; display: inline-grid; justify-items: center; gap: 14px; margin-top: 30px;
+    background: none; border: 0; color: inherit; cursor: pointer; padding: 12px 24px; border-radius: 16px; font: inherit;
+  }
+  .candle-btn svg { width: 120px; height: auto; overflow: visible; position: relative; z-index: 1; }
+  .glow {
+    position: absolute; left: 50%; top: 4px; width: 300px; height: 300px; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,176,32,.32) 0%, rgba(255,176,32,.08) 38%, transparent 66%);
+    transition: opacity .6s; pointer-events: none;
+  }
+  .flame { transform-origin: 70px 92px; animation: flicker 1.3s ease-in-out infinite alternate; transition: opacity .3s, transform .3s; }
+  @keyframes flicker { 0% { transform: scale(1, 1) rotate(-1.5deg); } 50% { transform: scale(1.04, .96) rotate(1deg); } 100% { transform: scale(.97, 1.04) rotate(-.5deg); } }
+  .is-out .flame { opacity: 0; transform: scale(.2); animation: none; }
+  .is-out .glow { opacity: 0; }
+  .smoke { opacity: 0; transition: opacity .4s; }
+  .is-out .smoke { opacity: .55; animation: smoke 2.2s ease-out forwards; }
+  @keyframes smoke { from { transform: translateY(0); opacity: .6; } to { transform: translateY(-26px); opacity: 0; } }
+  .hint { position: relative; z-index: 1; color: var(--muted); }
+  .result { margin: 26px auto 0; max-width: 34ch; min-height: 7.5rem; }
+  .result[hidden] { display: none !important; }
+  .result strong { display: block; font-family: var(--font-display); font-weight: 400; font-size: 2rem; color: var(--accent); line-height: 1.1; }
+  .result p { margin-top: 12px; font-size: 1.12rem; }
+  .again { margin-top: 18px; background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; padding: 8px 16px; cursor: pointer; font: inherit; font-size: .9rem; }
+  .again:hover { color: var(--text); border-color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding-block: 26px calc(34px); color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+  #confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 60; }
+
+  @media (min-width: 820px) {
+    .hero { grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); gap: 56px; padding-block: 84px 92px; }
+    .hero h1 { font-size: clamp(5rem, 9.4vw, 7.6rem); }
+    .ticket { transform: rotate(-2.2deg); }
+    @keyframes rise { from { transform: translateY(18px) rotate(-2.2deg); } to { transform: rotate(-2.2deg); } }
+    .fav-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; }
+    section { padding-block: 120px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .ticker-track, .flame, .chip .dot, .ticket { animation: none; }
+    .stops::after { transition: none; }
+  }
+</style>
+
+<header class="wrap hero">
+  <div>
+    <p class="chip mono"><span class="dot"></span><span id="status">21 October 2026</span></p>
+    <p class="kicker mono">Happy Birthday</p>
+    <h1>Yanika<span class="end">.</span></h1>
+    <p class="lede">Meri best friend ke liye ek chhoti si website. Poori <em>black</em>, kyunki black tumhara colour hai.</p>
+  </div>
+
+  <aside class="ticket" aria-label="Birthday ticket for Yanika Pathak">
+    <div class="ticket-main">
+      <div class="ticket-head"><b>BIRTHDAY EXPRESS</b><span>No. 2110</span></div>
+      <dl>
+        <div><dt>Passenger</dt><dd>Yanika Pathak</dd></div>
+        <div><dt>Date</dt><dd>21 Oct 2026</dd></div>
+        <div><dt>From</dt><dd>MIT-WPU, Aug 2025</dd></div>
+        <div><dt>To</dt><dd>Best friend, 15 Mar 2026</dd></div>
+        <div><dt>Seat</dt><dd>Hamesha reserved</dd></div>
+        <div><dt>Fare</dt><dd>Rs 0 (Sachin ke naam)</dd></div>
+      </dl>
+    </div>
+    <div class="tear"></div>
+    <div class="ticket-stub">
+      <div class="barcode" aria-hidden="true"></div>
+      <div class="stub-note"><span>Valid: hamesha</span><span>Refund: nahi milega</span></div>
+    </div>
+  </aside>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-group">
+      <span>Happy Birthday Yanika</span><i></i><span>Vada Pav</span><i></i><span>Pani Puri</span><i></i><span>Chaat</span><i></i><span>Outing</span><i></i><span>Best Friend</span><i></i>
+    </div>
+    <div class="ticker-group">
+      <span>Happy Birthday Yanika</span><i></i><span>Vada Pav</span><i></i><span>Pani Puri</span><i></i><span>Chaat</span><i></i><span>Outing</span><i></i><span>Best Friend</span><i></i>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section class="wrap" id="route">
+    <p class="eyebrow mono">Hamara route</p>
+    <h2>Ek hi campus se, best friend tak</h2>
+    <ol class="stops" id="stops">
+      <li class="stop">
+        <p class="when mono">Aug 2025</p>
+        <h3>MIT-WPU</h3>
+        <p>Hum MIT-WPU ke ek hi campus mein the. Tumhe dekha zaroor tha, par baat nahi hui thi. Lagbhag saat mahine aise hi nikal gaye.</p>
+      </li>
+      <li class="stop">
+        <p class="when mono">15 Mar 2026</p>
+        <h3>Pehli baat</h3>
+        <p>Pehli baar baat hui. Yahin se sab shuru hua.</p>
+      </li>
+      <li class="stop">
+        <p class="when mono" id="todayLabel">21 Oct 2026</p>
+        <h3>Aaj tumhara birthday</h3>
+        <div class="count"><b id="days">220</b><span>din pehli baat ko</span></div>
+        <p>Itne se din mein tum meri best friend ban gayi.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap" id="pasand">
+    <p class="eyebrow mono">Tumhari pasand</p>
+    <h2>Jo tumhe pasand hai, sab yahan hai</h2>
+    <div class="fav-grid">
+      <div class="menu">
+        <div class="menu-title mono"><span>Aaj ka menu</span><span>Special</span></div>
+        <ul>
+          <li class="top"><span class="name">Vada Pav</span><span class="lead"></span><span class="tag">No. 1</span></li>
+          <li><span class="name">Pani Puri</span><span class="lead"></span><span class="tag">Thoda sa</span></li>
+          <li><span class="name">Chaat</span><span class="lead"></span><span class="tag">Thoda sa</span></li>
+          <li><span class="name">Outing</span><span class="lead"></span><span class="tag">Side order</span></li>
+        </ul>
+        <div class="menu-foot mono"><span>Bill</span><span>Sachin ke naam</span></div>
+      </div>
+
+      <dl class="about">
+        <div><dt class="mono">Colour</dt><dd><b>Black</b><small>Maine tumhe zyada tar black dress mein hi dekha hai.</small></dd></div>
+        <div><dt class="mono">Favourite plan</dt><dd><b>Outing</b><small>Jahan bhi jaana ho, plan tumhara.</small></dd></div>
+        <div><dt class="mono">Safar</dt><dd><b>Bus</b><small>Zyada tar bus se hi aana-jaana.</small></dd></div>
+        <div><dt class="mono">Mere liye</dt><dd><b>Hamesha available</b><small>Achhe time mein bhi, bure time mein bhi.</small></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="wrap" id="letter">
+    <p class="eyebrow mono">Ek chhoti si baat</p>
+    <h2>Jo mujhe bolna tha</h2>
+    <div class="letter">
+      <p>Yanika, 15 March 2026 ko hamari pehli baat hui. Us se pehle hum bas ek hi college mein the, MIT-WPU. Aaj tum meri best friend ho.</p>
+      <p>Ek baat mujhe kabhi theek se bolni nahi aayi. Jab mere saath koi nahi tha, tab tum thi. Achhe time mein bhi, bure time mein bhi, tum hamesha available rahi. Yeh meri life mein bahut bada farak hai.</p>
+      <p>Isliye yeh website. Poori black, kyunki maine tumhe zyada tar black dress mein hi dekha hai. Menu mein vada pav sabse upar, kyunki woh toh banta hai.</p>
+      <p>Happy Birthday, Yanika. Aise hi rehna, aur outings chalti rehni chahiye.</p>
+      <div class="sign"><b>Sachin</b><span class="mono">21.10.2026</span></div>
+    </div>
+  </section>
+
+  <section class="wrap wish" id="wish">
+    <p class="eyebrow mono">Last step</p>
+    <h2>Ab ek wish maango</h2>
+    <button class="candle-btn" id="candle" type="button" aria-label="Candle bujhao aur wish maango">
+      <span class="glow" aria-hidden="true"></span>
+      <svg viewBox="0 0 140 240" aria-hidden="true">
+        <defs>
+          <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffd36b"/><stop offset=".55" stop-color="#ffb020"/><stop offset="1" stop-color="#ff7a1a"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="70" cy="226" rx="58" ry="9" fill="#2a2622"/>
+        <rect x="52" y="104" width="36" height="120" rx="5" fill="#ece6da"/>
+        <path d="M52 132 L88 118 M52 160 L88 146 M52 188 L88 174 M52 216 L88 202" stroke="#ffb020" stroke-width="7"/>
+        <rect x="68" y="90" width="4" height="16" rx="2" fill="#3a342d"/>
+        <path class="smoke" d="M70 84 C 62 70, 78 62, 70 46" fill="none" stroke="#9a9286" stroke-width="3" stroke-linecap="round"/>
+        <g class="flame">
+          <path d="M70 28 C 58 52, 50 64, 54 82 C 57 96, 83 96, 86 82 C 90 64, 78 54, 70 28 Z" fill="url(#fl)"/>
+          <path d="M70 56 C 64 68, 62 76, 66 84 C 68 88, 74 88, 76 84 C 79 76, 74 68, 70 56 Z" fill="#fff3c9"/>
+        </g>
+      </svg>
+      <span class="hint mono" id="hint">Tap karke candle bujhao</span>
+    </button>
+    <div class="result" id="result" hidden aria-live="polite">
+      <strong>Wish maang li?</strong>
+      <p>Jo bhi maangi hai, woh poori ho. Happy Birthday, Yanika.</p>
+      <button class="again" id="again" type="button">Phir se jalao</button>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap mono">
+  <span>MIT-WPU se, Sachin ki taraf se Yanika ke liye</span>
+  <span>21.10.2026</span>
+</footer>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DAY = 86400000;
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var birthday = new Date(2026, 9, 21);
+  var firstTalk = new Date(2026, 2, 15);
+
+  // status chip + counter
+  var diff = Math.round((birthday - today) / DAY);
+  var status = document.getElementById('status');
+  if (diff === 0) status.textContent = 'Aaj tumhara din hai, 21 October';
+  else if (diff > 0) status.textContent = diff + (diff === 1 ? ' din baaki' : ' din baaki') + ', 21 October';
+  else status.textContent = '21 October 2026 ka din';
+
+  var since = Math.max(0, Math.round((today - firstTalk) / DAY));
+  document.getElementById('days').textContent = String(since);
+  if (diff !== 0) document.getElementById('todayLabel').textContent = '21 Oct 2026';
+
+  // route line fills as you scroll
+  var stops = document.getElementById('stops');
+  function progress() {
+    if (reduce) return;
+    var r = stops.getBoundingClientRect();
+    var p = (window.innerHeight * 0.7 - r.top) / r.height;
+    p = Math.min(1, Math.max(0, p));
+    stops.style.setProperty('--p', (p * 100).toFixed(1) + '%');
+  }
+  window.addEventListener('scroll', progress, { passive: true });
+  window.addEventListener('resize', progress);
+  progress();
+
+  // candle + confetti
+  var candle = document.getElementById('candle');
+  var result = document.getElementById('result');
+  var hint = document.getElementById('hint');
+  var again = document.getElementById('again');
+  var canvas = document.getElementById('confetti');
+  var raf = 0;
+
+  function burst(originX, originY) {
+    if (reduce) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var colors = ['#ffb020', '#ffd36b', '#ece6da', '#ff7a1a', '#9a9286'];
+    var parts = [];
+    for (var i = 0; i < 170; i++) {
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * 2.2;
+      var s = 7 + Math.random() * 11;
+      parts.push({
+        x: originX, y: originY,
+        vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+        w: 5 + Math.random() * 7, h: 3 + Math.random() * 5,
+        r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.4,
+        c: colors[(Math.random() * colors.length) | 0]
+      });
+    }
+    var start = performance.now();
+    cancelAnimationFrame(raf);
+    (function frame(t) {
+      var el = t - start;
+      ctx.clearRect(0, 0, W, H);
+      var alive = 0;
+      for (var j = 0; j < parts.length; j++) {
+        var p = parts[j];
+        p.vy += 0.3; p.vx *= 0.992; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        if (p.y < H + 20) alive++;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.globalAlpha = Math.max(0, 1 - el / 4200);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+      if (alive > 0 && el < 4200) raf = requestAnimationFrame(frame);
+      else ctx.clearRect(0, 0, W, H);
+    })(start);
+  }
+
+  candle.addEventListener('click', function () {
+    if (candle.classList.contains('is-out')) return;
+    candle.classList.add('is-out');
+    hint.textContent = 'Bujh gayi';
+    result.hidden = false;
+    var r = candle.querySelector('svg').getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height * 0.3);
+    setTimeout(function () { result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' }); }, 250);
+  });
+  again.addEventListener('click', function () {
+    candle.classList.remove('is-out');
+    hint.textContent = 'Tap karke candle bujhao';
+    result.hidden = true;
+  });
+})();
+</script>
+
+</body></html>
